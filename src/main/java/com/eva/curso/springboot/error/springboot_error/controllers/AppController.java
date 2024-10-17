@@ -9,8 +9,9 @@ public class AppController
     @GetMapping("/app")
     public String index()
     {
-        // No se puede dividir por 0 porque es infinito (error 500: ArithmeticException)
-        int value = 100/0;
+        //int value = 100/0; // No se puede dividir por 0 porque es infinito (error 500: ArithmeticException)
+
+        int value = Integer.parseInt("10x"); // No se puede formatear a número porque contiene letra
         System.out.println(value);
         return "ok 200";
     }    
