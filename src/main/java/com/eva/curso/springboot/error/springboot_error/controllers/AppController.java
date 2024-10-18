@@ -35,13 +35,9 @@ public class AppController
         /* Forzamos para que salga un error (excepción NullPointerException) creando un objeto(id) que no existe,
         si ponemos un id que existe al tener el role vacío sin definir pues no se puede obtener el nombre del role 
         y lanza otro error (excepción HttpMessageNotWritableException) */
-        User user = service.findById(id); 
-        if(user == null)
-        {
-            throw new UserNotFounException("Error el usuario no existe"); // Para evitar el NullPointException
-        }
-        
+        // Si el usuario no existe devuelve la excepción personalizada y si existe devuelve el usuario
+        User user = service.findById(id).orElseThrow(() -> new UserNotFounException("Error el usuario no existe")); // Para evitar el NullPointException); 
         System.out.println(user.getLastname());
-        return service.findById(id);
+        return user;
     }
 }
